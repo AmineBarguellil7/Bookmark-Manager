@@ -69,3 +69,40 @@ The application follows a client-server architecture:
 - Bookmark folders/collections
 - Import/export bookmarks
 - Sharing bookmarks with other users
+
+## MCP Server
+
+This project functions as a Model Context Protocol (MCP) server, allowing AI agents to interact with your bookmarks directly.
+
+### Available Tools
+
+- **get-user-bookmarks**: Retrieves all bookmarks for the currently authenticated user.
+- **create-bookmark**: Creates a new bookmark. Requires `url` and `title` arguments, with an optional `notes` argument.
+
+### Configuration
+
+To use this project as an MCP server in Antigravity or other MCP clients, you need to add it to your `mcpServers` configuration.
+
+1. **Start the development server**:
+   Make sure the project is running locally:
+   ```bash
+   npm run dev
+   ```
+
+2. **Edit your MCP Settings**:
+   Locate your MCP settings file : `mcp_config.json`.
+
+3. **Add the Server Definition**:
+   Add the following configuration to the `mcpServers` object:
+
+   ```json
+   {
+     "mcpServers": {
+       "bookmark-manager": {
+         "url": "http://localhost:3000/mcp",
+       }
+     }
+   }
+   ```
+
+   *Note: This server requires authentication. Ensure your MCP client supports the authentication flow defined in `src/app/[transport]/route.ts`.*
